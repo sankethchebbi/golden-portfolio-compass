@@ -25,7 +25,6 @@ import { cn } from '@/lib/utils';
 
 interface PerformanceChartProps {
   scheme: SchemeData;
-  selectedTimeline?: TimelinePeriod;
 }
 
 const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
@@ -52,7 +51,9 @@ interface DateRange {
   to?: Date;
 }
 
-export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, selectedTimeline }) => {
+export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme }) => {
+  // Internal state for controlling the timeline
+  const [selectedTimeline, setSelectedTimeline] = useState<TimelinePeriod>('1Y');
   const [dateRange, setDateRange] = useState<DateRange>({
     from: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
     to: new Date(),
@@ -143,6 +144,12 @@ export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, sele
     { label: 'SI', period: 'SI' },
   ];
 
+  const handleTimelineChange = (period: TimelinePeriod) => {
+    setSelectedTimeline(period);
+    // Clear custom date range when selecting a predefined timeline
+    setDateRange({ from: new Date(), to: undefined });
+  };
+
   const filteredData = getFilteredData();
   
   // Normalize data for better visualization (starting from a common base)
@@ -196,6 +203,14 @@ export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, sele
     return 5;
   };
 
+  const handleDateRangeSelect = (range: DateRange | undefined) => {
+    if (range) {
+      setDateRange(range);
+      // Clear the selected timeline when using custom date range
+      setSelectedTimeline('' as TimelinePeriod);
+    }
+  };
+
   return (
     <Card className="bg-card-gradient border border-slate-200 shadow-sm">
       <CardHeader className="pb-2">
@@ -212,9 +227,7 @@ export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, sele
                   "h-8 bg-white border-slate-300 text-slate-800",
                   selectedTimeline === btn.period && "bg-dashboard-highlight text-slate-800 border-dashboard-highlight"
                 )}
-                onClick={() => {
-                  setDateRange({ from: new Date(), to: undefined });
-                }}
+                onClick={() => handleTimelineChange(btn.period)}
               >
                 {btn.label}
               </Button>
@@ -225,7 +238,10 @@ export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, sele
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-8 bg-white border-slate-300 text-slate-800"
+                  className={cn(
+                    "h-8 bg-white border-slate-300 text-slate-800",
+                    !selectedTimeline && "bg-dashboard-highlight text-slate-800 border-dashboard-highlight"
+                  )}
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {dateRange?.from ? (
@@ -249,9 +265,7 @@ export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, sele
                   mode="range"
                   defaultMonth={dateRange?.from}
                   selected={dateRange}
-                  onSelect={(range) => {
-                    setDateRange(range || { from: new Date() });
-                  }}
+                  onSelect={handleDateRangeSelect}
                   numberOfMonths={2}
                   className="p-3 pointer-events-auto"
                 />

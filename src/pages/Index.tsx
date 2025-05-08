@@ -6,23 +6,17 @@ import { PerformanceMetrics } from '@/components/PerformanceMetrics';
 import { PerformanceChart } from '@/components/PerformanceChart';
 import { PortfolioHoldings } from '@/components/PortfolioHoldings';
 import { SectorBreakdown } from '@/components/SectorBreakdown';
-import { ClientType, SchemeData, TimelinePeriod, getSchemeById } from '@/data/mockData';
+import { ClientType, SchemeData, getSchemeById } from '@/data/mockData';
+import { RiskMetrics } from '@/components/RiskMetrics';
 
 const Index = () => {
   const [selectedScheme, setSelectedScheme] = useState<SchemeData | null>(null);
-  const [selectedTimeline, setSelectedTimeline] = useState<TimelinePeriod | undefined>(undefined);
 
   const handleSelectionChange = (clientType: ClientType, manager: string, schemeId: string) => {
     const scheme = getSchemeById(schemeId);
     if (scheme) {
       setSelectedScheme(scheme);
-      // Reset timeline when changing scheme
-      setSelectedTimeline(undefined);
     }
-  };
-
-  const handleTimelineChange = (period: TimelinePeriod) => {
-    setSelectedTimeline(period);
   };
 
   return (
@@ -38,19 +32,16 @@ const Index = () => {
               <DashboardHeader scheme={selectedScheme} />
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <PerformanceMetrics 
-                  scheme={selectedScheme} 
-                  onTimelineChange={handleTimelineChange} 
-                />
-                <SectorBreakdown scheme={selectedScheme} />
+                <PerformanceMetrics scheme={selectedScheme} />
+                <RiskMetrics scheme={selectedScheme} />
               </div>
               
-              <PerformanceChart 
-                scheme={selectedScheme} 
-                selectedTimeline={selectedTimeline} 
-              />
+              <PerformanceChart scheme={selectedScheme} />
               
-              <PortfolioHoldings scheme={selectedScheme} />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                <SectorBreakdown scheme={selectedScheme} />
+                <PortfolioHoldings scheme={selectedScheme} />
+              </div>
             </>
           ) : (
             <div className="flex items-center justify-center min-h-[400px] rounded-lg border border-dashed border-slate-300 bg-dashboard-card">

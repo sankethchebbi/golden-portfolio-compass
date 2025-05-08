@@ -6,22 +6,14 @@ import { SchemeData, TimelinePeriod, formatPercentage } from '@/data/mockData';
 
 interface PerformanceMetricsProps {
   scheme: SchemeData;
-  onTimelineChange?: (period: TimelinePeriod) => void;
 }
 
 export const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({ 
-  scheme, 
-  onTimelineChange 
+  scheme
 }) => {
   const [activeTab, setActiveTab] = useState<'returns' | 'comparison'>('returns');
   
   const timelinePeriods: TimelinePeriod[] = ['1D', '1W', '1M', '3M', '6M', '1Y', 'YTD', 'MTD', 'FYTD', 'SI'];
-  
-  const handleTimelineClick = (period: TimelinePeriod) => {
-    if (onTimelineChange) {
-      onTimelineChange(period);
-    }
-  };
 
   return (
     <Card className="bg-card-gradient border border-slate-200 shadow-sm">
@@ -45,8 +37,7 @@ export const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({
                 return (
                   <div 
                     key={period}
-                    onClick={() => handleTimelineClick(period)} 
-                    className={`p-3 rounded-md cursor-pointer border border-slate-300 hover:border-slate-400 transition-colors ${isPositive ? 'hover:bg-dashboard-positive/10' : 'hover:bg-dashboard-negative/10'}`}
+                    className={`p-3 rounded-md border border-slate-300 ${isPositive ? 'hover:bg-dashboard-positive/10' : 'hover:bg-dashboard-negative/10'}`}
                   >
                     <div className="text-xs text-slate-500">{period}</div>
                     <div className={`text-lg font-semibold ${isPositive ? 'text-dashboard-positive' : 'text-dashboard-negative'}`}>
@@ -72,8 +63,7 @@ export const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({
                 return (
                   <div 
                     key={period}
-                    onClick={() => handleTimelineClick(period)}
-                    className="flex items-center justify-between p-3 rounded-md cursor-pointer border border-slate-300 hover:border-slate-400 transition-colors"
+                    className="flex items-center justify-between p-3 rounded-md border border-slate-300 hover:border-slate-400 transition-colors"
                   >
                     <div className="text-sm font-medium text-slate-700">{period}</div>
                     <div className="flex items-center gap-4">
