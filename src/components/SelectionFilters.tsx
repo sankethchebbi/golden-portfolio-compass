@@ -52,18 +52,18 @@ export const SelectionFilters: React.FC<SelectionFiltersProps> = ({ onSelectionC
   };
 
   return (
-    <Card className="bg-card-gradient border-none shadow-md">
+    <Card className="bg-card-gradient border border-slate-200 shadow-sm">
       <CardContent className="p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <label htmlFor="client-type" className="text-sm font-medium text-slate-300">
+            <label htmlFor="client-type" className="text-sm font-medium text-slate-700">
               Client Type
             </label>
             <Select value={clientType} onValueChange={handleClientTypeChange}>
-              <SelectTrigger id="client-type" className="bg-dashboard-card border-slate-700 text-slate-100">
+              <SelectTrigger id="client-type" className="bg-white border-slate-300 text-slate-800">
                 <SelectValue placeholder="Select client type" />
               </SelectTrigger>
-              <SelectContent className="bg-dashboard-card border-slate-700 text-slate-100">
+              <SelectContent className="bg-white border-slate-300 text-slate-800">
                 <SelectItem value="client">Client Facing</SelectItem>
                 <SelectItem value="prop">Proprietary</SelectItem>
               </SelectContent>
@@ -71,7 +71,7 @@ export const SelectionFilters: React.FC<SelectionFiltersProps> = ({ onSelectionC
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="fund-manager" className="text-sm font-medium text-slate-300">
+            <label htmlFor="fund-manager" className="text-sm font-medium text-slate-700">
               Fund Manager
             </label>
             <Select 
@@ -79,10 +79,10 @@ export const SelectionFilters: React.FC<SelectionFiltersProps> = ({ onSelectionC
               onValueChange={handleManagerChange} 
               disabled={!clientType}
             >
-              <SelectTrigger id="fund-manager" className="bg-dashboard-card border-slate-700 text-slate-100">
+              <SelectTrigger id="fund-manager" className="bg-white border-slate-300 text-slate-800">
                 <SelectValue placeholder="Select fund manager" />
               </SelectTrigger>
-              <SelectContent className="bg-dashboard-card border-slate-700 text-slate-100">
+              <SelectContent className="bg-white border-slate-300 text-slate-800">
                 {filteredManagers.map((manager) => (
                   <SelectItem key={manager} value={manager}>
                     {manager}
@@ -93,7 +93,7 @@ export const SelectionFilters: React.FC<SelectionFiltersProps> = ({ onSelectionC
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="scheme" className="text-sm font-medium text-slate-300">
+            <label htmlFor="scheme" className="text-sm font-medium text-slate-700">
               Scheme
             </label>
             <Select 
@@ -101,10 +101,10 @@ export const SelectionFilters: React.FC<SelectionFiltersProps> = ({ onSelectionC
               onValueChange={handleSchemeChange} 
               disabled={!selectedManager}
             >
-              <SelectTrigger id="scheme" className="bg-dashboard-card border-slate-700 text-slate-100">
+              <SelectTrigger id="scheme" className="bg-white border-slate-300 text-slate-800">
                 <SelectValue placeholder="Select scheme" />
               </SelectTrigger>
-              <SelectContent className="bg-dashboard-card border-slate-700 text-slate-100">
+              <SelectContent className="bg-white border-slate-300 text-slate-800">
                 {filteredSchemes.map((scheme) => (
                   <SelectItem key={scheme.id} value={scheme.id}>
                     {scheme.name}

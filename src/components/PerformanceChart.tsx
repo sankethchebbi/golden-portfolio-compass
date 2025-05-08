@@ -31,15 +31,15 @@ interface PerformanceChartProps {
 const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-dashboard-card p-3 border border-slate-700 rounded shadow">
-        <p className="font-medium text-slate-100">{label}</p>
+      <div className="bg-white p-3 border border-slate-200 rounded shadow">
+        <p className="font-medium text-slate-800">{label}</p>
         <p className="text-sm mt-1">
-          <span className="text-dashboard-highlight">Scheme: </span>
-          <span className="text-slate-100">{payload[0].value?.toFixed(2)}</span>
+          <span className="text-dashboard-highlight font-medium">Scheme: </span>
+          <span className="text-slate-800">{payload[0].value?.toFixed(2)}</span>
         </p>
         <p className="text-sm">
-          <span className="text-slate-400">Benchmark: </span>
-          <span className="text-slate-100">{payload[1].value?.toFixed(2)}</span>
+          <span className="text-slate-500">Benchmark: </span>
+          <span className="text-slate-800">{payload[1].value?.toFixed(2)}</span>
         </p>
       </div>
     );
@@ -197,20 +197,20 @@ export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, sele
   };
 
   return (
-    <Card className="bg-card-gradient border-none shadow-md">
+    <Card className="bg-card-gradient border border-slate-200 shadow-sm">
       <CardHeader className="pb-2">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-          <CardTitle className="text-lg font-medium text-white">Performance Chart</CardTitle>
+          <CardTitle className="text-lg font-medium text-slate-800">Performance Chart</CardTitle>
           
           <div className="flex flex-wrap items-center gap-2">
             {timeButtons.map((btn) => (
               <Button 
                 key={btn.label}
-                variant={selectedTimeline === btn.period ? "secondary" : "outline"}
+                variant={selectedTimeline === btn.period ? "default" : "outline"}
                 size="sm"
                 className={cn(
-                  "h-8 bg-dashboard-card border-slate-700 text-slate-100",
-                  selectedTimeline === btn.period && "bg-dashboard-highlight text-slate-900 border-dashboard-highlight"
+                  "h-8 bg-white border-slate-300 text-slate-800",
+                  selectedTimeline === btn.period && "bg-dashboard-highlight text-slate-800 border-dashboard-highlight"
                 )}
                 onClick={() => {
                   setDateRange({ from: new Date(), to: undefined });
@@ -225,7 +225,7 @@ export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, sele
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-8 bg-dashboard-card border-slate-700 text-slate-100"
+                  className="h-8 bg-white border-slate-300 text-slate-800"
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {dateRange?.from ? (
@@ -243,7 +243,7 @@ export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, sele
                   <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 bg-dashboard-card border-slate-700" align="end">
+              <PopoverContent className="w-auto p-0 bg-white border-slate-300" align="end">
                 <Calendar
                   initialFocus
                   mode="range"
@@ -272,15 +272,15 @@ export const PerformanceChart: React.FC<PerformanceChartProps> = ({ scheme, sele
                 bottom: 0,
               }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3d" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis 
                 dataKey="date" 
-                tick={{ fill: '#94a3b8' }} 
+                tick={{ fill: '#64748b' }} 
                 tickFormatter={formatXAxis} 
                 tickCount={getTickCount()}
               />
               <YAxis 
-                tick={{ fill: '#94a3b8' }} 
+                tick={{ fill: '#64748b' }} 
                 domain={['auto', 'auto']} 
               />
               <Tooltip content={<CustomTooltip />} />

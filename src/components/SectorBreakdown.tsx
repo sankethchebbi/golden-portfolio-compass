@@ -17,8 +17,8 @@ interface CustomTooltipProps {
 const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-dashboard-card p-2 border border-slate-700 rounded shadow text-sm">
-        <p className="font-medium text-slate-100">{payload[0].name}</p>
+      <div className="bg-white p-2 border border-slate-200 rounded shadow text-sm">
+        <p className="font-medium text-slate-800">{payload[0].name}</p>
         <p className="text-dashboard-highlight">{formatPercentage(payload[0].value)}</p>
       </div>
     );
@@ -73,17 +73,17 @@ export const SectorBreakdown: React.FC<SectorBreakdownProps> = ({ scheme }) => {
   const industryColors = generateColors(industryData.length);
 
   return (
-    <Card className="bg-card-gradient border-none shadow-md">
+    <Card className="bg-card-gradient border border-slate-200 shadow-sm">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-medium text-white">Portfolio Allocation</CardTitle>
+        <CardTitle className="text-lg font-medium text-slate-800">Portfolio Allocation</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'sectors' | 'industries')}>
-          <TabsList className="bg-dashboard-card border border-slate-700 mb-4">
-            <TabsTrigger value="sectors" className="data-[state=active]:bg-slate-700">
+          <TabsList className="bg-white border border-slate-300 mb-4">
+            <TabsTrigger value="sectors" className="data-[state=active]:bg-dashboard-highlight data-[state=active]:text-slate-800">
               Sectors
             </TabsTrigger>
-            <TabsTrigger value="industries" className="data-[state=active]:bg-slate-700">
+            <TabsTrigger value="industries" className="data-[state=active]:bg-dashboard-highlight data-[state=active]:text-slate-800">
               Top Industries
             </TabsTrigger>
           </TabsList>
@@ -120,9 +120,9 @@ export const SectorBreakdown: React.FC<SectorBreakdownProps> = ({ scheme }) => {
                           className="w-3 h-3 rounded-full mr-2" 
                           style={{ backgroundColor: sectorColors[index] }}
                         />
-                        <span className="text-sm text-slate-100">{item.name}</span>
+                        <span className="text-sm text-slate-800">{item.name}</span>
                       </div>
-                      <span className="text-sm font-medium text-slate-100">
+                      <span className="text-sm font-medium text-slate-800">
                         {formatPercentage(item.value)}
                       </span>
                     </div>
@@ -165,11 +165,11 @@ export const SectorBreakdown: React.FC<SectorBreakdownProps> = ({ scheme }) => {
                           style={{ backgroundColor: industryColors[index] }}
                         />
                         <div>
-                          <span className="text-sm text-slate-100">{item.name}</span>
-                          <span className="text-xs text-slate-400 block">{item.sector}</span>
+                          <span className="text-sm text-slate-800">{item.name}</span>
+                          <span className="text-xs text-slate-500 block">{item.sector}</span>
                         </div>
                       </div>
-                      <span className="text-sm font-medium text-slate-100">
+                      <span className="text-sm font-medium text-slate-800">
                         {formatPercentage(item.value)}
                       </span>
                     </div>

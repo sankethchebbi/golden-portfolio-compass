@@ -61,28 +61,28 @@ export const PortfolioHoldings: React.FC<PortfolioHoldingsProps> = ({ scheme }) 
   };
 
   return (
-    <Card className="bg-card-gradient border-none shadow-md">
+    <Card className="bg-card-gradient border border-slate-200 shadow-sm">
       <CardHeader className="pb-2">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-          <CardTitle className="text-lg font-medium text-white">Portfolio Holdings</CardTitle>
+          <CardTitle className="text-lg font-medium text-slate-800">Portfolio Holdings</CardTitle>
           <div className="flex items-center gap-2">
             <div className="relative">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-slate-400" />
+              <Search className="absolute left-2 top-2.5 h-4 w-4 text-slate-500" />
               <Input
                 placeholder="Search holdings..."
-                className="pl-8 h-9 w-full sm:w-[180px] bg-dashboard-card border-slate-700 text-slate-100"
+                className="pl-8 h-9 w-full sm:w-[180px] bg-white border-slate-300 text-slate-800"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
               />
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="h-9 bg-dashboard-card border-slate-700 text-slate-100">
+                <Button variant="outline" className="h-9 bg-white border-slate-300 text-slate-800">
                   {filterSector ? filterSector : "All Sectors"}
                   <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-dashboard-card border-slate-700 text-slate-100">
+              <DropdownMenuContent className="bg-white border-slate-300 text-slate-800">
                 <DropdownMenuItem onClick={() => setFilterSector('')}>
                   All Sectors
                 </DropdownMenuItem>
@@ -97,42 +97,42 @@ export const PortfolioHoldings: React.FC<PortfolioHoldingsProps> = ({ scheme }) 
         </div>
       </CardHeader>
       <CardContent>
-        <div className="rounded-md border border-slate-700 overflow-x-auto">
+        <div className="rounded-md border border-slate-300 overflow-x-auto">
           <Table>
-            <TableHeader className="bg-slate-800">
+            <TableHeader className="bg-slate-100">
               <TableRow>
-                <TableHead className="text-slate-300" onClick={() => requestSort('name')}>
+                <TableHead className="text-slate-700" onClick={() => requestSort('name')}>
                   Name/Ticker
                 </TableHead>
-                <TableHead className="text-slate-300" onClick={() => requestSort('sector')}>
+                <TableHead className="text-slate-700" onClick={() => requestSort('sector')}>
                   Sector/Industry
                 </TableHead>
-                <TableHead className="text-right text-slate-300" onClick={() => requestSort('weight')}>
+                <TableHead className="text-right text-slate-700" onClick={() => requestSort('weight')}>
                   Weight
                 </TableHead>
-                <TableHead className="text-right text-slate-300" onClick={() => requestSort('value')}>
+                <TableHead className="text-right text-slate-700" onClick={() => requestSort('value')}>
                   Value
                 </TableHead>
-                <TableHead className="text-right text-slate-300" onClick={() => requestSort('dayChange')}>
+                <TableHead className="text-right text-slate-700" onClick={() => requestSort('dayChange')}>
                   1D Change
                 </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {sortedHoldings.map((holding) => (
-                <TableRow key={holding.ticker} className="border-slate-700">
+                <TableRow key={holding.ticker} className="border-slate-200">
                   <TableCell>
-                    <div className="font-medium text-slate-100">{holding.name}</div>
-                    <div className="text-sm text-slate-400">{holding.ticker}</div>
+                    <div className="font-medium text-slate-800">{holding.name}</div>
+                    <div className="text-sm text-slate-500">{holding.ticker}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="font-medium text-slate-100">{holding.sector}</div>
-                    <div className="text-sm text-slate-400">{holding.industry}</div>
+                    <div className="font-medium text-slate-800">{holding.sector}</div>
+                    <div className="text-sm text-slate-500">{holding.industry}</div>
                   </TableCell>
-                  <TableCell className="text-right font-medium text-slate-100">
+                  <TableCell className="text-right font-medium text-slate-800">
                     {formatPercentage(holding.weight)}
                   </TableCell>
-                  <TableCell className="text-right font-medium text-slate-100">
+                  <TableCell className="text-right font-medium text-slate-800">
                     {scheme.currency} {formatNumber(holding.value / 1000000, 1)}M
                   </TableCell>
                   <TableCell className={`text-right font-medium ${holding.dayChange >= 0 ? 'text-dashboard-positive' : 'text-dashboard-negative'}`}>

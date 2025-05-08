@@ -21,36 +21,36 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ scheme }) => {
     <div className="space-y-4">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-white">{scheme.name}</h1>
-          <p className="text-slate-400">
-            Managed by <span className="text-slate-300">{scheme.manager}</span> | {scheme.clientType === 'client' ? 'Client Facing' : 'Proprietary Fund'}
+          <h1 className="text-2xl md:text-3xl font-bold text-slate-800">{scheme.name}</h1>
+          <p className="text-slate-600">
+            Managed by <span className="text-slate-800">{scheme.manager}</span> | {scheme.clientType === 'client' ? 'Client Facing' : 'Proprietary Fund'}
           </p>
         </div>
         
         <div className="text-right mt-4 md:mt-0">
-          <p className="text-slate-400">{today}</p>
+          <p className="text-slate-600">{today}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-card-gradient border-none shadow-md">
+        <Card className="bg-card-gradient border border-slate-200 shadow-sm">
           <CardContent className="p-4 flex flex-col">
-            <span className="text-sm text-slate-400">AUM</span>
-            <span className="text-xl font-bold text-white">{formatCurrency(scheme.aum, scheme.currency)}</span>
+            <span className="text-sm text-slate-500">AUM</span>
+            <span className="text-xl font-bold text-slate-800">{formatCurrency(scheme.aum, scheme.currency)}</span>
           </CardContent>
         </Card>
 
-        <Card className="bg-card-gradient border-none shadow-md">
+        <Card className="bg-card-gradient border border-slate-200 shadow-sm">
           <CardContent className="p-4 flex flex-col">
-            <span className="text-sm text-slate-400">Benchmark</span>
-            <span className="text-xl font-bold text-white">{scheme.benchmark}</span>
+            <span className="text-sm text-slate-500">Benchmark</span>
+            <span className="text-xl font-bold text-slate-800">{scheme.benchmark}</span>
           </CardContent>
         </Card>
 
-        <Card className="bg-card-gradient border-none shadow-md">
+        <Card className="bg-card-gradient border border-slate-200 shadow-sm">
           <CardContent className="p-4 flex flex-col">
-            <span className="text-sm text-slate-400">Inception Date</span>
-            <span className="text-xl font-bold text-white">
+            <span className="text-sm text-slate-500">Inception Date</span>
+            <span className="text-xl font-bold text-slate-800">
               {new Date(scheme.inceptionDate).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'short',
@@ -60,10 +60,10 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({ scheme }) => {
           </CardContent>
         </Card>
 
-        <Card className="bg-card-gradient border-none shadow-md">
+        <Card className="bg-card-gradient border border-slate-200 shadow-sm">
           <CardContent className="p-4 flex flex-col">
-            <span className="text-sm text-slate-400">Currency</span>
-            <span className="text-xl font-bold text-white">{scheme.currency}</span>
+            <span className="text-sm text-slate-500">Currency</span>
+            <span className="text-xl font-bold text-slate-800">{scheme.currency}</span>
           </CardContent>
         </Card>
       </div>

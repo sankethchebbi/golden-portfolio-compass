@@ -64,12 +64,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				dashboard: {
-					background: '#13151a',
-					card: '#1c1f2c',
+					background: '#FFFFFF',
+					card: '#F3F3F3',
 					highlight: '#FFD600',
 					positive: '#22c55e',
 					negative: '#ef4444',
-					neutral: '#94a3b8'
+					neutral: '#8A898C'
 				}
 			},
 			borderRadius: {

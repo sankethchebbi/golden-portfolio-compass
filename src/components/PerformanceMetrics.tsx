@@ -24,15 +24,15 @@ export const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({
   };
 
   return (
-    <Card className="bg-card-gradient border-none shadow-md">
+    <Card className="bg-card-gradient border border-slate-200 shadow-sm">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-medium text-white">Performance Metrics</CardTitle>
+        <CardTitle className="text-lg font-medium text-slate-800">Performance Metrics</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'returns' | 'comparison')}>
-          <TabsList className="bg-dashboard-card border border-slate-700 mb-4">
-            <TabsTrigger value="returns" className="data-[state=active]:bg-slate-700">Returns</TabsTrigger>
-            <TabsTrigger value="comparison" className="data-[state=active]:bg-slate-700">Benchmark Comparison</TabsTrigger>
+          <TabsList className="bg-white border border-slate-300 mb-4">
+            <TabsTrigger value="returns" className="data-[state=active]:bg-dashboard-highlight data-[state=active]:text-slate-800">Returns</TabsTrigger>
+            <TabsTrigger value="comparison" className="data-[state=active]:bg-dashboard-highlight data-[state=active]:text-slate-800">Benchmark Comparison</TabsTrigger>
           </TabsList>
           
           <TabsContent value="returns">
@@ -46,9 +46,9 @@ export const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({
                   <div 
                     key={period}
                     onClick={() => handleTimelineClick(period)} 
-                    className={`p-3 rounded-md cursor-pointer border border-slate-700 hover:border-slate-600 transition-colors ${isPositive ? 'hover:bg-dashboard-positive/10' : 'hover:bg-dashboard-negative/10'}`}
+                    className={`p-3 rounded-md cursor-pointer border border-slate-300 hover:border-slate-400 transition-colors ${isPositive ? 'hover:bg-dashboard-positive/10' : 'hover:bg-dashboard-negative/10'}`}
                   >
-                    <div className="text-xs text-slate-400">{period}</div>
+                    <div className="text-xs text-slate-500">{period}</div>
                     <div className={`text-lg font-semibold ${isPositive ? 'text-dashboard-positive' : 'text-dashboard-negative'}`}>
                       {formatPercentage(value)}
                     </div>
@@ -73,24 +73,24 @@ export const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({
                   <div 
                     key={period}
                     onClick={() => handleTimelineClick(period)}
-                    className="flex items-center justify-between p-3 rounded-md cursor-pointer border border-slate-700 hover:border-slate-600 transition-colors"
+                    className="flex items-center justify-between p-3 rounded-md cursor-pointer border border-slate-300 hover:border-slate-400 transition-colors"
                   >
-                    <div className="text-sm font-medium text-slate-300">{period}</div>
+                    <div className="text-sm font-medium text-slate-700">{period}</div>
                     <div className="flex items-center gap-4">
                       <div className="text-right">
-                        <div className="text-xs text-slate-400">Scheme</div>
+                        <div className="text-xs text-slate-500">Scheme</div>
                         <div className={`text-sm font-medium ${schemeValue >= 0 ? 'text-dashboard-positive' : 'text-dashboard-negative'}`}>
                           {formatPercentage(schemeValue)}
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-xs text-slate-400">Benchmark</div>
+                        <div className="text-xs text-slate-500">Benchmark</div>
                         <div className={`text-sm font-medium ${benchmarkValue >= 0 ? 'text-dashboard-positive' : 'text-dashboard-negative'}`}>
                           {formatPercentage(benchmarkValue)}
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-xs text-slate-400">Diff</div>
+                        <div className="text-xs text-slate-500">Diff</div>
                         <div className={`text-sm font-medium ${isPositive ? 'text-dashboard-positive' : 'text-dashboard-negative'}`}>
                           {formatPercentage(difference)}
                         </div>
