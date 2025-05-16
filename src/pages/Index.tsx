@@ -8,12 +8,9 @@ import { PortfolioHoldings } from '@/components/PortfolioHoldings';
 import { SectorBreakdown } from '@/components/SectorBreakdown';
 import { ClientType, SchemeData, getSchemeById } from '@/data/mockData';
 import { RiskMetrics } from '@/components/RiskMetrics';
-import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [selectedScheme, setSelectedScheme] = useState<SchemeData | null>(null);
-  const navigate = useNavigate();
 
   const handleSelectionChange = (clientType: ClientType, manager: string, schemeId: string) => {
     const scheme = getSchemeById(schemeId);
@@ -25,15 +22,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-dashboard-background text-slate-800">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-6">
+        <div className="mb-6">
           <h1 className="text-3xl font-bold text-slate-800">Hedge Fund Dashboard</h1>
-          <Button 
-            variant="outline" 
-            className="bg-white border-slate-300 hover:bg-slate-100" 
-            onClick={() => navigate('/admin')}
-          >
-            Admin View
-          </Button>
         </div>
         
         <div className="space-y-6">
