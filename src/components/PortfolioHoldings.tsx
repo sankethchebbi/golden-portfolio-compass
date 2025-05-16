@@ -102,19 +102,16 @@ export const PortfolioHoldings: React.FC<PortfolioHoldingsProps> = ({ scheme }) 
             <TableHeader className="bg-slate-100">
               <TableRow>
                 <TableHead className="text-slate-700" onClick={() => requestSort('name')}>
-                  Name/Ticker
+                  Stock Name/Ticker
                 </TableHead>
                 <TableHead className="text-slate-700" onClick={() => requestSort('sector')}>
-                  Sector/Industry
+                  Industry/Sector
                 </TableHead>
                 <TableHead className="text-right text-slate-700" onClick={() => requestSort('weight')}>
-                  Weight
+                  Weight %
                 </TableHead>
                 <TableHead className="text-right text-slate-700" onClick={() => requestSort('value')}>
                   Value
-                </TableHead>
-                <TableHead className="text-right text-slate-700" onClick={() => requestSort('dayChange')}>
-                  1D Change
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -134,9 +131,6 @@ export const PortfolioHoldings: React.FC<PortfolioHoldingsProps> = ({ scheme }) 
                   </TableCell>
                   <TableCell className="text-right font-medium text-slate-800">
                     {scheme.currency} {formatNumber(holding.value / 1000000, 1)}M
-                  </TableCell>
-                  <TableCell className={`text-right font-medium ${holding.dayChange >= 0 ? 'text-dashboard-positive' : 'text-dashboard-negative'}`}>
-                    {formatPercentage(holding.dayChange)}
                   </TableCell>
                 </TableRow>
               ))}

@@ -79,105 +79,117 @@ export const SectorBreakdown: React.FC<SectorBreakdownProps> = ({ scheme }) => {
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'sectors' | 'industries')}>
-          <TabsList className="bg-white border border-slate-300 mb-4">
-            <TabsTrigger value="sectors" className="data-[state=active]:bg-dashboard-highlight data-[state=active]:text-slate-800">
-              Sectors
-            </TabsTrigger>
-            <TabsTrigger value="industries" className="data-[state=active]:bg-dashboard-highlight data-[state=active]:text-slate-800">
-              Top Industries
-            </TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="sectors" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="h-[300px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={sectorData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={90}
-                      paddingAngle={1}
-                      dataKey="value"
-                      labelLine={false}
-                    >
-                      {sectorData.map((_, index) => (
-                        <Cell key={`cell-${index}`} fill={sectorColors[index]} />
-                      ))}
-                    </Pie>
-                    <Tooltip content={<CustomTooltip />} />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-              <div>
-                <div className="space-y-1">
-                  {sectorData.map((item, index) => (
-                    <div key={item.name} className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <div 
-                          className="w-3 h-3 rounded-full mr-2" 
-                          style={{ backgroundColor: sectorColors[index] }}
-                        />
-                        <span className="text-sm text-slate-800">{item.name}</span>
-                      </div>
-                      <span className="text-sm font-medium text-slate-800">
-                        {formatPercentage(item.value)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="lg:w-1/5">
+              <TabsList className="bg-white border border-slate-300 mb-4 flex lg:flex-col w-full">
+                <TabsTrigger 
+                  value="sectors" 
+                  className="flex-1 data-[state=active]:bg-dashboard-highlight data-[state=active]:text-slate-800"
+                >
+                  Sectors
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="industries" 
+                  className="flex-1 data-[state=active]:bg-dashboard-highlight data-[state=active]:text-slate-800"
+                >
+                  Top Industries
+                </TabsTrigger>
+              </TabsList>
             </div>
-          </TabsContent>
-          
-          <TabsContent value="industries" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="h-[300px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={industryData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={90}
-                      paddingAngle={1}
-                      dataKey="value"
-                      labelLine={false}
-                    >
-                      {industryData.map((_, index) => (
-                        <Cell key={`cell-${index}`} fill={industryColors[index]} />
-                      ))}
-                    </Pie>
-                    <Tooltip content={<CustomTooltip />} />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-              <div>
-                <div className="space-y-1">
-                  {industryData.map((item, index) => (
-                    <div key={item.name} className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <div 
-                          className="w-3 h-3 rounded-full mr-2" 
-                          style={{ backgroundColor: industryColors[index] }}
-                        />
-                        <div>
-                          <span className="text-sm text-slate-800">{item.name}</span>
-                          <span className="text-xs text-slate-500 block">{item.sector}</span>
+            
+            <div className="lg:w-4/5">
+              <TabsContent value="sectors" className="mt-0">
+                <div className="flex flex-col lg:flex-row gap-6">
+                  <div className="h-[250px] lg:w-1/3">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={sectorData}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={60}
+                          outerRadius={90}
+                          paddingAngle={1}
+                          dataKey="value"
+                          labelLine={false}
+                        >
+                          {sectorData.map((_, index) => (
+                            <Cell key={`cell-${index}`} fill={sectorColors[index]} />
+                          ))}
+                        </Pie>
+                        <Tooltip content={<CustomTooltip />} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <div className="lg:w-2/3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                      {sectorData.map((item, index) => (
+                        <div key={item.name} className="flex items-center justify-between p-2 rounded-md border border-slate-200">
+                          <div className="flex items-center">
+                            <div 
+                              className="w-3 h-3 rounded-full mr-2" 
+                              style={{ backgroundColor: sectorColors[index] }}
+                            />
+                            <span className="text-sm text-slate-800">{item.name}</span>
+                          </div>
+                          <span className="text-sm font-medium text-slate-800">
+                            {formatPercentage(item.value)}
+                          </span>
                         </div>
-                      </div>
-                      <span className="text-sm font-medium text-slate-800">
-                        {formatPercentage(item.value)}
-                      </span>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
+              </TabsContent>
+              
+              <TabsContent value="industries" className="mt-0">
+                <div className="flex flex-col lg:flex-row gap-6">
+                  <div className="h-[250px] lg:w-1/3">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={industryData}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={60}
+                          outerRadius={90}
+                          paddingAngle={1}
+                          dataKey="value"
+                          labelLine={false}
+                        >
+                          {industryData.map((_, index) => (
+                            <Cell key={`cell-${index}`} fill={industryColors[index]} />
+                          ))}
+                        </Pie>
+                        <Tooltip content={<CustomTooltip />} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <div className="lg:w-2/3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
+                      {industryData.map((item, index) => (
+                        <div key={item.name} className="flex items-center justify-between p-2 rounded-md border border-slate-200">
+                          <div className="flex items-center">
+                            <div 
+                              className="w-3 h-3 rounded-full mr-2" 
+                              style={{ backgroundColor: industryColors[index] }}
+                            />
+                            <div>
+                              <span className="text-sm text-slate-800">{item.name}</span>
+                              <span className="text-xs text-slate-500 block">{item.sector}</span>
+                            </div>
+                          </div>
+                          <span className="text-sm font-medium text-slate-800">
+                            {formatPercentage(item.value)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
             </div>
-          </TabsContent>
+          </div>
         </Tabs>
       </CardContent>
     </Card>
