@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -39,8 +38,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { 
   SchemeData, 
   Holding, 
-  SectorAllocation, 
-  IndustryAllocation 
+  SectorAllocation 
 } from '@/data/mockData';
 import { useForm } from 'react-hook-form';
 
@@ -128,7 +126,7 @@ const Admin = () => {
       return {
         name: name.trim(),
         weight: weight,
-      } as IndustryAllocation;
+      };
     });
     
     const sectorData: SectorAllocation = {
