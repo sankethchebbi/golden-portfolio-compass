@@ -4,8 +4,6 @@ import { SelectionFilters } from '@/components/SelectionFilters';
 import { DashboardHeader } from '@/components/DashboardHeader';
 import { PerformanceMetrics } from '@/components/PerformanceMetrics';
 import { PerformanceChart } from '@/components/PerformanceChart';
-import { PortfolioHoldings } from '@/components/PortfolioHoldings';
-import { SectorBreakdown } from '@/components/SectorBreakdown';
 import { ClientType, SchemeData, getSchemeById } from '@/data/mockData';
 import { RiskMetrics } from '@/components/RiskMetrics';
 
@@ -39,16 +37,6 @@ const Index = () => {
               </div>
               
               <PerformanceChart scheme={selectedScheme} />
-              
-              {/* Horizontal Portfolio Allocation */}
-              <div className="mt-6">
-                <SectorBreakdown scheme={selectedScheme} />
-              </div>
-              
-              {/* Portfolio Holdings */}
-              <div className="mt-6">
-                <PortfolioHoldings scheme={selectedScheme} />
-              </div>
             </>
           ) : (
             <div className="flex items-center justify-center min-h-[400px] rounded-lg border border-dashed border-slate-300 bg-dashboard-card">
